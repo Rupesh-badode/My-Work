@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFC Online Order</title>
+    <link rel="stylesheet" href="../Node_Modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../Node_Modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function OrderClick(){
+          document.getElementById("lblName").innerHTML = document.getElementById("txtName").value;
+          document.getElementById("lblDate").innerHTML = document.getElementById("textdate").value;
+          document.getElementById("lblDays").innerHTML =  document.getElementById("textNo").value;
+          document.getElementById("lblPeople").innerHTML = document.getElementById("textpeople").value;
+          var Roomtype = "";
+          var RoomCost = 0;
+          var facilitiesName ="";
+          var facilitiesCost = 0;
+    
+          delexRadio = document.getElementById("Delex");
+          SuiteRadio = document.getElementById("Suite");
+
+          if(delexRadio.checked){
+            Roomtype = delexRadio.value;
+            RoomCost = 1500;
+            TotalCost=1500;
+          }
+          if(SuiteRadio.checked){
+            Roomtype = SuiteRadio.value;
+            RoomCost =500;
+            TotalCost=500;
+          }
+
+          ACRadio   =    document.getElementById("A/C");
+          ParkingRadio = document.getElementById("Parking");
+         
+          if(ACRadio.checked){
+            facilitiesName = ACRadio.value + "<br>";
+            facilitiesCost =200;
+            TotalCost =RoomCost + facilitiesCost;
+            
+
+          }
+          if(ParkingRadio.checked){
+            facilitiesName += ParkingRadio.value + "<br>";
+            facilitiesCost = 150;
+            TotalCost = RoomCost + facilitiesCost;
+          }
+          
+        
+          document.getElementById("lblRoom").innerHTML =RoomCost;
+          document.getElementById("lblfacilities").innerHTML =facilitiesCost;
+          document.getElementById("lblTotal").innerHTML=TotalCost;
+          
+                        }
+    </script>
+</head>
+<body>
+    <header>
+        <img src="../images/hotel-online-booking-banner.jpg" width="100%">
+    </header>
+    <section>
+        <div class="accordion" id="orderForm">
+            <!--Customer Details-->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button data-bs-target="#customer" data-bs-toggle="collapse" class="btn btn-dark w-100">Customer Details</button>
+                </div>
+                <div class="accordion-collapse collapse show" id="customer" data-bs-parent="#orderForm">
+                    <div class="accordion-body">
+                        <dl>
+                            <dt>Customer Name</dt>
+                            <dd><input type="text" class="form-control " id="txtName"</dd>
+                            <dt>Check in Date</dt>
+                            <dd><input type="date" class="form-control" id="textdate"</dd>
+                            <dt>Total No. of Days</dt>
+                            <dd><input type="number" min="1" class="form-control" id="textNo"</dd>
+                            <dt>Total No. of Persons</dt>
+                            <dd><input type="number" min="1"  class="form-control" id="textpeople"</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <!--Room type-->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="btn btn-dark w-100" data-bs-target="#Room" data-bs-toggle="collapse">Select Room Type</button>
+                </div>
+                <div class="accordion-collapse collapse hide" id="Room" data-bs-parent="#orderForm">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="card col">
+                                   <img src="../images/deluxe_room.jpg" class="card-img-top" height="250">
+                                   <div class="card-header">
+                                    <h2>Delex Room</h2>
+                                   </div>
+                                   <div class="card-footer">
+                                     <h3><input type="radio" id="Delex" class="form-check-input" name="room"> &#8377;1500</h3>
+                                   </div>
+                            </div>
+                             <div class="card col">
+                                    <img src="../images/suite-living-room.jpg" height="250" class="card-img-top">
+                                    <div class="card-header">
+                                        <h2>Suite Room</h2>
+                                    </div>
+                                    <div class="card-footer ">
+                                        <h3><input type="radio" id="Suite" name="room" class="form-check-input"> &#8377;500</h3>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+         <!--Room facilities-->
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <button class="btn btn-dark w-100" data-bs-target="#facilities" data-bs-toggle="collapse">Select Facilities</button>
+            </div>
+            <div class="accordion-collapse collapse hide" id="facilities" data-bs-parent="#orderform">
+                <div class="accordion-body">
+                    <div class="row">
+                        <div class="card col-6">
+                          <img src="../images/Air.jpeg" height="250" width="50%" class="card-img-top">
+                          <div class="card-header">
+                              <h2>A/C</h2>
+                          </div>
+                          <div class="card-footer">
+                            <h3><input type="radio" id="A/C" Name="Facilities" class="form-check-input"> &#8377;200</h3>
+                          </div>
+                        </div>
+                        <div class="card col-6">
+                            <img src="../images/Cars.jpeg" width="50%" height="250"  class="card-img-top">
+                            <div class="card-header">
+                                <h2>Parking</h2>
+                            </div>
+                            <div class="card-footer">
+                                <h3><input type="radio" id="Parking" Name="Facilities" class="form-check-input"> &#8377;150</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+        <button class="btn btn-danger m-1" type="button" data-bs-toggle="modal" data-bs-target=".modal" onclick="OrderClick()">Register</button>
+        <div class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Bill Details</h2>
+                        <button  class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body text-dark">
+                        <dl class="row">
+                            <dt class="col-4">Customer</dt>
+                            <dd class="col-8" id="lblName"></dd>
+                            <dt class="col-4">Check in Date</dt>
+                            <dd class="col-8" id="lblDate"></dd>
+                            <dt class="col-4">Total Days</dt>
+                            <dd class="col-8" id="lblDays"></dd>
+                            <dt class="col-4">Total Persons</dt>
+                            <dd class="col-8" id="lblPeople"></dd>
+                            <dt class="col-4">Room rent</dt>
+                            <dd class="col-8" id="lblRoom"></dd>
+                            <dt class="col-4">Facilities Price</dt>
+                            <dd class="col-8" id="lblfacilities"></dd>
+                            <dt class="col-4">Total</dt>
+                            <dd class="col-8" id="lblTotal"></dd>
+                        </dl>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-bs-dismiss="modal" class="btn btn-danger">Oky</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+    </section>
+
+
+<script src="../Node_Modules/jquery/dist/jquery.js"></script>
+<script src="../Node_Modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
