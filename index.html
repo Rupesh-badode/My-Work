@@ -12,7 +12,6 @@
     <!-- CSS only -->
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-
     <script>
         function OrderClick(){
           document.getElementById("lblName").innerHTML = document.getElementById("txtName").value;
@@ -59,11 +58,48 @@
           document.getElementById("lblfacilities").innerHTML =facilitiesCost;
           document.getElementById("lblTotal").innerHTML=TotalCost;
           
-                        }
+         }
     </script>
+    <style>
+        h5{
+            color: white;
+            margin: 3px;
+        }
+        p{
+            color: white;
+        }
+    </style>
+    
+
 </head>
 <body>
     <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+            <div class="container-fluid">
+                <img src="../icon/Diamond-Royal-Crown.svg" height="40px" width="50px"  >
+                <a class="navbar-brand" href="index.html">Royal</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#footer">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#footer">Support</a>
+                        </li>
+                    </ul> 
+                </div>
+                <div class="text-end nav-item">
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#examplemodal">Login</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#last-modal"><span class="bi bi-person"></span>Sign-up</button>
+                </div>
+            </div>
+        </nav>
         <img src="https://static.vecteezy.com/system/resources/previews/000/358/274/original/vector-hotel-online-booking-banner.jpg" width="100%">
     </header>
     <section>
@@ -157,7 +193,7 @@
     </div>
 
     
-        <button class="btn btn-danger m-1" type="button" data-bs-toggle="modal" data-bs-target=".modal" onclick="OrderClick()">Register</button>
+        <button class="btn btn-primary m-1" type="button" data-bs-toggle="modal" data-bs-target=".modal" onclick="OrderClick()">Register</button>
         <div class="modal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -184,14 +220,96 @@
                         </dl>
                     </div>
                     <div class="modal-footer">
-                        <button data-bs-dismiss="modal" class="btn btn-danger">Oky</button>
+                        <button data-bs-dismiss="modal" class="btn btn-primary">Oky</button>
                     </div>
+                </div>
+            </div>
+        </div>
+         
+        <!--Sign in -->
+        <div class="modal" id="examplemodal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Sign in</h2>
+                </div>
+                <div class="modal-body">
+                    <dl>
+                        <dt>Mail or Mobile Number</dt>
+                        <dd><input class="form-control" placeholder="Enter text" type="text"></dd>
+                        <dt>Password</dt>
+                        <dd><input class="form-control" placeholder="Enter Password" type="password"></dd>
+                    </dl>
+                </div>
+                <div class="modal-footer">
+                  <button data-bs-dismiss="modal" class="btn btn-danger m-1">Cancel</button>
+                  <button data-bs-dismiss="modal" class="btn btn-primary m-1">Confirm</button>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Sign up-->
+        <div class="modal" id="last-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                   <div class="modal-header">
+                    <h2>Create Account</h2>
+                   </div>
+                   <div class="modal-body">
+                      <dl>
+                        <dt>Your Name</dt>
+                        <dd><input type="text" placeholder="Enter First and Last Name" class="form-control"></dd>
+                        <dt>Mobile Number</dt>
+                        <dd><input class="form-control" type="tel" placeholder="Mobile Number"</dd>
+                        <dt>Email</dt>
+                        <dd><input class="form-control" type="email"</dd>
+                        <dt>Password</dt>
+                        <dd><input type="password" class="form-control" ></dd>
+                       </dl>
+                   </div>
+                   <div class="modal-footer">
+                    <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Confirm</button>
+                   </div>
                 </div>
             </div>
         </div>
      
     </section>
+    
+    <footer >
+         <div id="footer"  class="container-fluid bg-dark">
+            <div class="row">
+                <div class="col">
+                    <h5>About</h5>
+                    <p>Developer<p>
+                    <p>Career</p>
+                    <p>Hotel Book</p>
+                    <p>Learn More..</p>
+                </div>
+                <div class="col">
+                    <h5>Contact</h5>
+                    <p>Telephone:**********</p>
+                    <p>Contact Us <span class="bi bi-people-fill"></span></p>
+                    <p>Git Hub <span class="bi bi-github"></span></p>
+                    <p>Instagram  <span class="bi bi-instagram"></span></p>
+                </div>
+                <div class="col">
+                    <h5>Project</h5>
+                    <p>UI&UX</p>
 
+                </div>
+                <div class="col">
+                    <h5>Technology</h5> 
+                    <p>HTML  5.3</p>
+                    <p>CSS </p>
+                    <P>bootstrap v5.0</P>
+                    <P>JavaScript</P>
+                </div>
+             </div>
+         </div>
+    </footer>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <!-- JavaScript Bundle with Popper -->
