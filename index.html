@@ -58,7 +58,228 @@
           document.getElementById("lblfacilities").innerHTML =facilitiesCost;
           document.getElementById("lblTotal").innerHTML=TotalCost;
           
-         }
+          function LoadPage(pageUrl){
+            $.ajax({
+                    method:"get", 
+                    url: pageUrl,
+                    success: (data)=>{
+                        $("section").html(data);
+                    }
+             })
+        }
+        $(function(){
+            LoadPage("home.html");
+
+            $("#navCustomer").click(()=>{
+                LoadPage("customers.html")
+            })
+
+            $("#navHome").click(()=>{
+                LoadPage("home.html");
+            })
+
+            $(document).on("click", "#navbtnRegister", ()=>{
+                LoadPage("customer-register.html");
+            })
+
+            $(document).on("click", "#btnRegister", ()=>{
+                 var customer = {
+                    UserId: $("#txtId").val(),
+                    UserName: $("#txtName").val(),
+                    Password: $("#txtPwd").val(),
+                    Age : parseInt($("#txtAge").val()),
+                    Email: $("#txtEmail").val(),
+                    Mobile: $("#txtMobile").val()
+                 };
+                 $.ajax({
+                    method: "post",
+                    url: "http://localhost:4400/registercustomer",
+                    data: customer
+                 })
+                 alert("Registered Successfully..");
+                 LoadPage("customer-login.html");
+            });
+
+            $(document).on("keyup", "#txtId",()=>{
+                 $.ajax({
+                    method:"get", 
+                    url: "http://localhost:4400/customers",
+                    success: (customers)=>{
+                        for(var customer of customers) {
+                            if(customer.UserId==$("#txtId").val()){
+                                $("#userError").html("User Id Taken - Try Another").css("color","red");
+                                break;
+                            } else {
+                                $("#userError").html("User Id Available").css("color","green");
+                            }
+                        }
+                    }
+                 })
+            })
+            $(document).on("click", "#navbtnLogin", ()=>{
+                LoadPage("customer-login.html");
+            });
+            $(document).on("click", "#btnNew",()=>{
+                LoadPage("customer-register.html");
+            });
+
+            $(document).on("click", "#btnLogin", ()=>{
+        
+                $.ajax({
+                    method:"get", 
+                    url: "http://localhost:4400/customers",
+                    success : (customers) =>{
+                        var customer = customers.find((c)=>
+                           c.UserId==$("#txtId").val() && c.Password==$("#txtPwd").val()
+                        );
+                        if(customer.UserId==$("#txtId").val() && customer.Password==$("#txtPwd").val()) {
+                            $.cookie("userid", $("#txtId").val());
+                            $.ajax({
+                                    method:'get',
+                                    url: "http://localhost:4400/products", 
+                                    success: (data)=>{
+                                        
+                                        $.each(data, (key, product)=>{
+                                            $(`<tr><td>${product.Name}</td><td>${product.Price}</td><td><button class="btn btn-info"><span class="bi bi-eye-fill"></span></button></td></tr>`).appendTo("tbody");
+                                        })
+                                    }
+                                })
+                            LoadPage("products.html");
+                            $("#username").html($.cookie("userid"));
+                        } else {
+                            LoadPage("error.html");
+                        }
+                    }     function LoadPage(pageUrl){
+            $.ajax({
+                    method:"get", 
+                    url: pageUrl,
+                    success: (data)=>{
+                        $("section").html(data);
+                    }
+             })
+        }
+        $(function(){
+            LoadPage("home.html");
+
+            $("#navCustomer").click(()=>{
+                LoadPage("customers.html")
+            })
+
+            $("#navHome").click(()=>{
+                LoadPage("home.html");
+            })
+
+            $(document).on("click", "#navbtnRegister", ()=>{
+                LoadPage("customer-register.html");
+            })
+
+            $(document).on("click", "#btnRegister", ()=>{
+                 var customer = {
+                    UserId: $("#txtId").val(),
+                    UserName: $("#txtName").val(),
+                    Password: $("#txtPwd").val(),
+                    Age : parseInt($("#txtAge").val()),
+                    Email: $("#txtEmail").val(),
+                    Mobile: $("#txtMobile").val()
+                 };
+                 $.ajax({
+                    method: "post",
+                    url: "http://localhost:4400/registercustomer",
+                    data: customer
+                 })
+                 alert("Registered Successfully..");
+                 LoadPage("customer-login.html");
+            });
+
+            $(document).on("keyup", "#txtId",()=>{
+                 $.ajax({
+                    method:"get", 
+                    url: "http://localhost:4400/customers",
+                    success: (customers)=>{
+                        for(var customer of customers) {
+                            if(customer.UserId==$("#txtId").val()){
+                                $("#userError").html("User Id Taken - Try Another").css("color","red");
+                                break;
+                            } else {
+                                $("#userError").html("User Id Available").css("color","green");
+                            }
+                        }
+                    }
+                 })
+            })
+            $(document).on("click", "#navbtnLogin", ()=>{
+                LoadPage("customer-login.html");
+            });
+            $(document).on("click", "#btnNew",()=>{
+                LoadPage("customer-register.html");
+            });
+
+            $(document).on("click", "#btnLogin", ()=>{
+        
+                $.ajax({
+                    method:"get", 
+                    url: "http://localhost:4400/customers",
+                    success : (customers) =>{
+                        var customer = customers.find((c)=>
+                           c.UserId==$("#txtId").val() && c.Password==$("#txtPwd").val()
+                        );
+                        if(customer.UserId==$("#txtId").val() && customer.Password==$("#txtPwd").val()) {
+                            $.cookie("userid", $("#txtId").val());
+                            $.ajax({
+                                    method:'get',
+                                    url: "http://localhost:4400/products", 
+                                    success: (data)=>{
+                                        
+                                        $.each(data, (key, product)=>{
+                                            $(`<tr><td>${product.Name}</td><td>${product.Price}</td><td><button class="btn btn-info"><span class="bi bi-eye-fill"></span></button></td></tr>`).appendTo("tbody");
+                                        })
+                                    }
+                                })
+                            LoadPage("products.html");
+                            $("#username").html($.cookie("userid"));
+                        } else {
+                            LoadPage("error.html");
+                        }
+                    }
+                })
+            })
+
+            $("#navProducts").click(()=>{
+                if($.cookie("userid")==undefined){
+                    LoadPage("customer-login.html");
+                } else {
+                    LoadPage("products.html");
+                }
+            })
+
+            $(document).on("click", "#btnSignout",()=>{
+                $.removeCookie("userid");
+                $("#username").html("");
+                LoadPage("customer-login.html");
+            })
+
+          
+        })
+                })
+            })
+
+            $("#navProducts").click(()=>{
+                if($.cookie("userid")==undefined){
+                    LoadPage("customer-login.html");
+                } else {
+                    LoadPage("products.html");
+                }
+            })
+
+            $(document).on("click", "#btnSignout",()=>{
+                $.removeCookie("userid");
+                $("#username").html("");
+                LoadPage("customer-login.html");
+            })
+
+          
+        })
+         
     </script>
     <style>
         h5{
@@ -154,7 +375,7 @@
                 </div>
             </div>
 
-         <!--Room facilities-->
+         <!--Room facilities--> 
 
         <div class="accordion-item">
             <div class="accordion-header">
